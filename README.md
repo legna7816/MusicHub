@@ -4,10 +4,15 @@
 
 ## 기술 스택
 
-- Java 11 / Servlet·JSP (Jakarta EE)
-- Apache Tomcat 10.1
-- MySQL 8
-- JDBC (DriverManager), BCrypt(jbcrypt), JSTL
+| 기술 | 설명 |
+|---|---|
+| Java 11 | 전체 백엔드 로직 |
+| Servlet / JSP (Jakarta EE) | `@WebServlet`, `HttpSession`, `@WebFilter` 기반 MVC 구조 |
+| Apache Tomcat 10.1 | 웹 애플리케이션 서버 |
+| MySQL 8 | 데이터 저장 (users, musics, boards 등) |
+| JDBC (DriverManager) | 순수 JDBC로 DB 연동 |
+| BCrypt (jbcrypt) | 회원가입/로그인 비밀번호 해시 |
+| JSTL | JSP 화면 로직 (`<c:if>` 등) |
 
 ## 주요 기능
 
