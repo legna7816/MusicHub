@@ -1,0 +1,95 @@
+/* =========================================================
+   user.css - 회원 도메인 스타일
+   로그인 / 회원가입 / 마이페이지
+   ========================================================= */
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', "Malgun Gothic", sans-serif;
+    background: #0d0d0d;
+    color: #e0e0e0;
+    margin: 0;
+    min-height: 100vh;
+}
+
+a { color: #e05c97; text-decoration: none; }
+a:hover { color: #c94b82; }
+
+/* 로그인 / 회원가입 박스*/
+.auth-box {
+    max-width: 360px;
+    margin: 120px auto 60px;
+    padding: 32px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.5);
+}
+.auth-box h1 { font-size: 20px; margin: 0 0 20px; text-align: center; color: #fff; }
+.auth-box label { display: block; margin: 14px 0 4px; font-size: 13px; color: #bbb; }
+.auth-box input, .auth-box select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+.auth-box button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 11px;
+    border: 0;
+    border-radius: 6px;
+    background: #e05c97;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+.auth-box button:hover { background: #c94b82; }
+.auth-box .error {
+    margin: 10px 0; padding: 10px; border-radius: 6px;
+    background: #3a2326; color: #ef6b6b; font-size: 13px;
+}
+.auth-box .notice {
+    margin: 10px 0; padding: 10px; border-radius: 6px;
+    background: #1e2a3a; color: #7ab0ef; font-size: 13px;
+}
+.auth-box .links { margin-top: 16px; text-align: center; font-size: 13px; color: #888; }
+.auth-box .links a { color: #e05c97; }
+
+/* 마이페이지 */
+.mypage-box {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 28px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.5);
+}
+.mypage-box h1 { font-size: 20px; margin: 0 0 8px; color: #fff; }
+.mypage-box h2 {
+    font-size: 15px; margin: 24px 0 10px; color: #e0e0e0;
+    border-top: 1px solid #333; padding-top: 18px;
+}
+.mypage-box label { display: block; margin: 10px 0 4px; font-size: 13px; color: #bbb; }
+.mypage-box input, .mypage-box select {
+    width: 100%; padding: 9px; box-sizing: border-box;
+    border: 1px solid #444; border-radius: 6px; font-size: 14px;
+    background: #2a2a2a; color: #e0e0e0;
+}
+.mypage-box .readonly { color: #888; font-size: 13px; margin: 4px 0 0; }
+.mypage-box button {
+    width: 100%; margin-top: 14px; padding: 10px; border: 0;
+    border-radius: 6px; color: #fff; font-size: 14px; cursor: pointer;
+}
+.mypage-box .save   { background: #e05c97; }
+.mypage-box .save:hover { background: #c94b82; }
+.mypage-box .danger { background: #c0392b; }
+.mypage-box .danger:hover { background: #a93226; }
+.mypage-box .msg {
+    margin: 10px 0; padding: 10px; border-radius: 6px;
+    background: #1e2a3a; color: #7ab0ef; font-size: 13px;
+}

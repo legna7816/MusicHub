@@ -1,0 +1,326 @@
+/* =========================
+   music.css - 음악 기능 전용 스타일
+   승민 담당: 음악 등록 / 상세 / 랭킹 페이지
+   ========================= */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d0d0d;
+    color: #e0e0e0;
+    min-height: 100vh;
+}
+
+/* 공통 레이아웃 */
+.music-wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.music-page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+/* 공통 버튼 */
+.mh-btn-pink {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: #e05c97;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.mh-btn-pink:hover { background: #c94b82; }
+
+.mh-btn-gray {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.mh-btn-gray:hover { background: #555; }
+
+.mh-btn-danger {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.mh-btn-danger:hover { background: #a93226; }
+
+/* 오류 메시지 */
+.error-msg {
+    background: #c0392b;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* =========================
+   음악 등록 폼
+   ========================= */
+.music-form {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #e0e0e0;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="file"] {
+    color: #bbb;
+    font-size: 0.9rem;
+}
+
+.file-name {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.3rem;
+}
+
+/* 썸네일 미리보기 */
+.thumbnail-preview {
+    display: none;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    border: 1px solid #444;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+/* =========================
+   음악 상세 페이지
+   ========================= */
+.detail-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* 썸네일 공통 */
+.detail-thumb,
+.ranking-thumb {
+    width: 100px;
+    height: 100px;
+    background: #2a2a2a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.detail-thumb img,
+.ranking-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.default-note {
+    font-size: 2.5rem;
+    color: #666;
+}
+
+.detail-info { display: flex; flex-direction: column; gap: 0.4rem; }
+.detail-title { font-size: 1.4rem; font-weight: 700; color: #fff; }
+.detail-artist { font-size: 1rem; color: #bbb; }
+.detail-genre,
+.detail-uploader,
+.detail-views {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* 30초 미리듣기 영역 */
+.preview-area {
+    background: #222;
+    border-radius: 10px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.preview-area h3 { font-size: 1rem; color: #e0e0e0; }
+
+/* 진행바 */
+.progress-bar-wrap {
+    background: #333;
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #e05c97;
+    transition: width 0.2s linear;
+}
+
+#timeDisplay {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.preview-end-msg {
+    font-size: 0.85rem;
+    color: #e05c97;
+    margin-top: 0.3rem;
+}
+
+.detail-buttons {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   랭킹 페이지
+   ========================= */
+.ranking-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* 랭킹 행 */
+.ranking-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 1rem;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: background 0.2s;
+}
+.ranking-row:hover { background: #252525; }
+
+/* 순위 배지 */
+.ranking-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    background: #333;
+    color: #aaa;
+}
+
+/* 1~3위 금/은/동 색상 */
+.rank-1 { background: #f4c542; color: #000; }
+.rank-2 { background: #b0bec5; color: #000; }
+.rank-3 { background: #cd7f32; color: #fff; }
+
+.ranking-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.ranking-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ranking-meta {
+    font-size: 0.82rem;
+    color: #888;
+}
+
+.ranking-views {
+    font-size: 0.85rem;
+    color: #aaa;
+    flex-shrink: 0;
+}
+
+.ranking-footer {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* 검색 결과 없음 */
+.empty-result {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #666;
+}
+.empty-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+.empty-title { font-size: 1rem; color: #888; margin-bottom: 0.4rem; }
+.empty-subtitle { font-size: 0.85rem; color: #666; }

@@ -1,0 +1,1177 @@
+@charset "UTF-8";
+
+/* =====================================================
+   [이서윤 담당]
+   MusicHub 음악 기능 전용 CSS
+
+   포함 기능
+   - 음악 목록
+   - 음악 상세
+   - 좋아요
+   - 댓글
+   - 플레이리스트
+   - 사용자 추천
+
+   CSS Prefix
+   - mh-
+   ===================================================== */
+
+
+/* =====================================================
+   musicList.jsp
+   검색 영역
+   ===================================================== */
+.recommend-search-area {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto 36px auto;
+
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+}
+
+.recommend-search-box {
+    position: relative;
+    width: 100%;
+}
+
+.recommend-search-box input {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+
+    padding: 0 48px 0 50px;
+
+    border-radius: 24px;
+    border: 1px solid #444;
+    outline: none;
+
+    background: #2a2a2a;
+    color: #e0e0e0;
+
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.recommend-clear-btn {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    color: #888;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+/* =====================================================
+   musicList.jsp
+   음악 목록 카드 / 좋아요 버튼
+   ===================================================== */
+
+.recommend-music-list {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.recommend-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e05c97;
+    font-size: 32px;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+.recommend-music-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.recommend-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #f5f5f5;
+}
+
+.recommend-meta {
+    font-size: 15px;
+    font-weight: 300;
+    color: #aaa;
+}
+
+.recommend-like-btn {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
+
+    color: #e05c97;
+    text-decoration: none;
+    font-size: 28px;
+
+    flex-shrink: 0;
+}
+
+.recommend-music-list {
+    display: block;
+    width: 100%;
+    max-width: 1150px;
+}
+
+.recommend-music-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding: 14px 8px;
+    box-sizing: border-box;
+}
+
+.recommend-music-link {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    text-decoration: none;
+    color: white;
+    min-width: 0;
+}
+
+.search-icon {
+    position: absolute;
+
+    left: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 18px;
+    color: #777;
+
+    pointer-events: none;
+}
+
+.search-icon i {
+    font-size: 16px;
+    color: #888;
+}
+
+/* =====================================================
+   공통 UI
+   - 페이지 페이드 효과
+   - 검색 오버레이
+   - 토스트 메시지
+   ===================================================== */
+
+.page-fade {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.page-fade.loaded {
+    opacity: 1;
+}
+
+
+/* 검색 중 검은 화면 */
+
+#searchOverlay {
+    position: fixed;
+    inset: 0;
+
+    background: #111;
+
+    opacity: 0;
+    pointer-events: none;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: opacity 0.25s ease;
+}
+
+#searchOverlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* 검색 중 텍스트 */
+
+.search-loading-text {
+    color: #ddd;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.recommend-like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mh-toast-message {
+    position: fixed;
+    left: 50%;
+    bottom: 48px;
+    transform: translateX(-50%) translateY(20px);
+
+    background: rgba(20, 20, 20, 0.92);
+    color: white;
+
+    padding: 12px 22px;
+    border-radius: 24px;
+
+    font-size: 14px;
+    font-weight: 300;
+
+    opacity: 0;
+    transition: all 0.3s ease;
+
+    z-index: 99999;
+}
+
+.mh-toast-message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.empty-result{
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    padding:120px 0;
+}
+
+.empty-icon{
+    font-size:72px;
+    color:#666;
+
+    margin-bottom:20px;
+}
+
+.empty-title{
+    font-size:32px;
+    font-weight:600;
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+.empty-subtitle{
+    font-size:18px;
+    color:#888;
+}
+
+/* =====================================================
+   musicList.jsp
+   필터 / 정렬 / 장르 드롭다운
+   ===================================================== */
+
+.recommend-filter-tabs {
+    width: fit-content;
+    margin: 0 auto 36px auto;
+
+    display: flex;
+    align-items: center;
+
+    background: #1a1a1a;
+    border-radius: 28px;
+    padding: 5px;
+}
+
+.mh-filter-tab {
+    border: none;
+    background: transparent;
+
+    color: #ddd;
+    text-decoration: none;
+
+    padding: 11px 24px;
+    border-radius: 24px;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.mh-filter-tab:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mh-filter-tab.active {
+    background: #e05c97;
+    color: white;
+}
+
+.mh-filter-dropdown {
+    position: relative;
+}
+
+.mh-filter-menu {
+    display: none;
+
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 170px;
+
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 18px;
+
+    padding: 12px;
+
+    z-index: 100;
+}
+
+.mh-filter-menu.show {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mh-filter-menu label {
+    color: #ddd;
+    font-size: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+}
+
+.mh-filter-menu input {
+    accent-color: #e05c97;
+}
+
+.mh-filter-apply-btn {
+    margin-top: 8px;
+
+    border: none;
+    border-radius: 18px;
+
+    padding: 8px 12px;
+
+    background: #e05c97;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* =====================================================
+   musicDetail.jsp
+   음악 상세 상단 영역
+   - 앨범 이미지
+   - 음악 정보
+   - 좋아요
+   - 플레이리스트 저장
+   ===================================================== */
+
+.mh-detail-cover {
+    width: 300px !important;
+    height: 300px !important;
+    border-radius: 16px !important;
+    background: #2a2a2a !important;
+    color: #e05c97 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 72px !important;
+    flex-shrink: 0 !important;
+}
+
+.mh-detail-info {
+    height: 300px !important;
+    flex: 1 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+
+    padding-top: 28px !important;
+}
+
+.mh-detail-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+}
+
+.mh-detail-circle-btn {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 50% !important;
+    background: #242424 !important;
+    color: #e05c97 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border: none !important;
+    text-decoration: none !important;
+    font-size: 22px !important;
+}
+
+.mh-detail-playlist-btn {
+    height: 54px !important;
+    padding: 0 46px !important;
+    border-radius: 28px !important;
+    background: #e05c97 !important;
+    color: #fff !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-weight: bold !important;
+    text-decoration: none !important;
+}
+
+.mh-detail-header {
+    width: 100%;
+    max-width: 1150px;
+    margin: 28px 0 24px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mh-detail-back-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #242424;
+    color: #e05c97;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.mh-detail-meta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    margin-top:8px;
+    margin-bottom:60px;
+}
+
+.mh-detail-artist{
+    margin:0 !important;
+    color:#ddd;
+}
+
+.mh-detail-genre{
+    margin:0 !important;
+    color:#aaa;
+}
+
+.mh-detail-artist::after{
+    content: " ·";
+    color: #aaa;
+}
+
+.mh-detail-stats {
+    display: flex !important;
+    gap: 24px !important;
+
+    margin-bottom: 14px !important;
+
+    color: #ddd !important;
+    font-size: 16px !important;
+}
+
+/*******************************************************
+ * musicDetail.jsp
+ * 플레이리스트 저장 확인 모달
+ *******************************************************/
+
+.mh-confirm-modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.65);
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:999999;
+}
+
+.mh-confirm-modal.show{
+    display:flex;
+}
+
+.mh-confirm-box{
+    width:360px;
+
+    background:#1a1a1a;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    text-align:center;
+}
+
+.mh-confirm-box h3{
+    margin:0 0 10px 0;
+    color:white;
+}
+
+.mh-confirm-box p{
+    color:#aaa;
+    margin-bottom:24px;
+}
+
+.mh-confirm-buttons{
+    display:flex;
+    gap:12px;
+}
+
+.mh-confirm-cancel-btn,
+.mh-confirm-delete-btn{
+    flex:1;
+
+    height:46px;
+
+    border:none;
+    border-radius:24px;
+
+    cursor:pointer;
+}
+
+.mh-confirm-cancel-btn{
+    background:#444;
+    color:white;
+}
+
+.mh-confirm-delete-btn{
+    background:#e05c97;
+    color:white;
+}
+
+/* =====================================================
+   musicDetail.jsp
+   댓글 시스템
+   - 댓글 입력
+   - 댓글 목록
+   - 댓글 삭제
+   ===================================================== */
+
+.mh-comment-date {
+    color: #888;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.mh-comment-form{
+    margin-bottom:40px;
+}
+
+.mh-comment-input-row{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+}
+
+.mh-comment-avatar{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    background:#52525b;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+    font-weight:bold;
+
+    flex-shrink:0;
+}
+
+.mh-comment-input-area{
+    flex:1;
+}
+
+.mh-comment-input-area textarea{
+    width:100%;
+    max-width:700px;
+
+    background:transparent;
+
+    border:none;
+    border-bottom:1px solid #555;
+
+    color:white;
+
+    resize:none;
+
+    padding:8px 0;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.mh-comment-submit-row{
+    display:flex;
+    justify-content:flex-end;
+
+    width:100%;
+    max-width:700px;
+
+    margin-top:12px;
+}
+
+.mh-comment-submit-btn{
+    border:none;
+
+    background:#e05c97;
+    color:white;
+
+    padding:10px 22px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+}
+
+.mh-comment-item{
+    position:relative;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:20px 0;
+
+    border-bottom:1px solid #333;
+}
+
+.mh-comment-user-row{
+    display:flex;
+    gap:14px;
+}
+
+.mh-comment-user-avatar{
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#52525b;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+
+    flex-shrink:0;
+}
+
+.mh-comment-user-info{
+    flex:1;
+}
+
+.mh-comment-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:8px;
+}
+
+.mh-comment-writer{
+    color:white;
+    font-weight:600;
+}
+
+.mh-comment-content{
+    color:#e5e5e5;
+    line-height:1.6;
+}
+
+.mh-comment-delete-btn{
+    position:absolute;
+
+    right:10px;
+    top:24px;
+
+    border:none;
+    background:none;
+
+    color:#777;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    padding:0;
+
+    transition:0.2s;
+}
+
+.mh-comment-delete-btn:hover{
+    color:#e05c97;
+}
+
+.mh-comment-delete-btn i{
+    margin:0;
+}
+
+.mh-detail-playlist-btn.saved{
+    background:#3a3a3a !important;
+    color:white !important;
+    border:none !important;
+}
+
+.mh-detail-panel{
+    width:100%;
+    padding-top:20px;
+}
+
+.mh-detail-panel hr{
+    border:none;
+    border-top:1px solid #444;
+    margin:28px 0;
+}
+
+.mh-detail-top{
+    display:flex !important;
+    align-items:center !important;
+    gap:36px !important;
+    max-width:1150px !important;
+}
+
+/* =====================================================
+   playlist.jsp
+   저장한 음악 목록
+   ===================================================== */
+
+.mh-playlist-cards{
+    display:grid !important;
+    grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)) !important;
+    gap:18px !important;
+
+    width:100% !important;
+    max-width:760px !important;
+    margin-top:32px !important;
+}
+
+.mh-playlist-card-link{
+    text-decoration:none;
+    color:inherit;
+}
+
+.mh-playlist-card-link:hover{
+    text-decoration:none;
+    color:inherit;
+}
+
+.mh-playlist-card{
+    position:relative;
+
+    width:100% !important;
+    min-width:0;
+
+    border-radius:14px;
+    overflow:hidden;
+
+    background:#1a1a1a;
+    border:1px solid #333;
+
+    transition:0.2s;
+}
+
+.mh-playlist-card:hover{
+    transform:translateY(-6px);
+    background:#252525;
+    box-shadow:0 14px 30px rgba(0,0,0,0.35);
+}
+
+.mh-playlist-album-box{
+    width:100%;
+    height:160px;
+
+    background:#2a2a2a;
+    color:#e05c97;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:64px;
+
+    overflow:hidden;
+}
+
+.mh-playlist-music-info{
+    padding:14px 16px 16px 16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.mh-playlist-music-info b{
+    color:white;
+    font-size:20px;
+    font-weight:700;
+}
+
+.mh-playlist-music-info span{
+    color:#bbb;
+    font-size:15px;
+}
+
+.mh-remove-btn{
+    position:absolute;
+    top:10px;
+    right:10px;
+
+    width:28px;
+    height:28px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(0,0,0,.55);
+    color:white;
+
+    cursor:pointer;
+    z-index:10;
+
+    transition:0.2s;
+}
+
+.mh-remove-btn:hover{
+    background:#c94b82;
+}
+
+/* 저장한 음악이 없을 때 */
+.mh-playlist-empty{
+    grid-column:1 / -1;
+
+    width:100%;
+    min-height:60vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+.mh-playlist-empty-icon{
+    font-size:50px;
+    margin-bottom:18px;
+}
+
+.mh-playlist-empty-title{
+    font-size:30px;
+    font-weight:700;
+    color:white;
+    margin-bottom:12px;
+}
+
+.mh-playlist-empty-subtitle{
+    font-size:15px;
+    color:#999;
+    line-height:1.5;
+}
+
+/* =====================================================
+   recommend.jsp
+   사용자 추천 페이지
+   - 추천 영역을 카드 박스로 묶어서 화면이 덜 난잡해 보이도록 정리
+   - 추천 결과가 없을 때도 빈 안내 박스가 자연스럽게 보이도록 수정
+   ===================================================== */
+
+html {
+    background: #0d0d0d;
+}
+
+body {
+    margin: 0;
+}
+
+.recommend-wrapper {
+    width: 100%;
+    max-width: 760px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    background: #0d0d0d;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', "Malgun Gothic", sans-serif;
+}
+
+.recommend-page {
+    padding-top: 42px;
+    padding-bottom: 70px;
+}
+
+.recommend-page-title {
+    margin: 0 0 12px 0;
+    font-size: 38px;
+    font-weight: 800;
+    color: white;
+}
+
+.recommend-page-subtitle {
+    margin: 0 0 36px 0;
+    color: #aaa;
+    font-size: 16px;
+}
+
+/* [이서윤 담당] 추천 섹션을 하나의 카드 박스로 정리 */
+.recommend-section {
+    max-width: 1200px;
+
+    margin: 0 auto 28px;
+
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+
+    padding: 28px;
+}
+
+.recommend-section-title {
+    margin: 0 0 8px 0;
+    font-size: 25px;
+    font-weight: 800;
+    color: white;
+}
+
+.recommend-section-desc {
+    margin: 0 0 24px 0;
+    color: #999;
+    font-size: 15px;
+}
+
+.recommend-card-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.recommend-card-link {
+    width: 200px;
+    text-decoration: none;
+    color: white;
+}
+
+.recommend-card {
+    width: 200px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    transition: 0.2s;
+}
+
+.recommend-card:hover {
+    transform: translateY(-6px);
+    background: #252525;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+}
+
+.recommend-album-box {
+    width: 100%;
+    height: 200px;
+
+    background: #2a2a2a;
+    color: #e05c97;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 76px;
+
+    overflow: hidden;
+    position: relative;
+}
+
+.recommend-card-info {
+    padding: 13px 14px 15px 14px;
+    min-width: 0;
+}
+
+.recommend-card-info b {
+    display: block;
+    margin-bottom: 4px;
+
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recommend-card-info span {
+    display: block;
+
+    color: #bbb;
+    font-size: 14px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* [이서윤 담당] 추천 결과가 없을 때 안내 박스 */
+.recommend-empty-text {
+    grid-column: 1 / -1;
+
+    margin: 0;
+    padding: 34px;
+
+    border-radius: 14px;
+    background: rgba(0,0,0,0.18);
+
+    color: #bbb;
+    font-size: 16px;
+    text-align: center;
+}
+
+.recommend-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.recommend-default-note {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 80px;
+    color: #e05c97;
+}
+
+/* =====================================================
+   공통 버튼
+   - MusicList
+   - Recommend
+   ===================================================== */
+
+.mh-btn-pink{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    height:48px;
+    padding:0 22px;
+
+    border:none;
+    border-radius:24px;
+
+    background:#e05c97;
+    color:#ffffff;
+
+    font-size:14px;
+    font-weight:600;
+
+    text-decoration:none;
+    cursor:pointer;
+
+    transition:all 0.2s ease;
+}
+
+.mh-btn-pink:hover{
+    background:#c94b82;
+    transform:translateY(-1px);
+}
+
+.mh-btn-pink:active{
+    transform:translateY(0);
+}
+
+
+/* =====================================================
+   playlistDetail.jsp
+   플레이리스트 상세 대표 이미지 4분할 보정
+   - 4칸을 완전히 같은 크기로 고정
+   - 이미지 원본 비율이 달라도 칸을 꽉 채우도록 object-fit 적용
+   ===================================================== */
+
+.playlist-detail-cover-grid {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
+    overflow: hidden;
+}
+
+.playlist-detail-cover-grid img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
+}
